@@ -41,4 +41,5 @@ const userProxy = new Proxy(user, {
   },
 });
 
+
 console.log(userProxy.age);
