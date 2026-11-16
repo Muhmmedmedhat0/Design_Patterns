@@ -6,23 +6,24 @@ let instance;
 // Within the constructor, we check to make sure the class hasn't already been instantiated.
 
 class Counter {
+  #counter = 0;
+
   constructor() {
     if (instance) {
       throw new Error(`you can only create one instance`);
     }
-    this.counter = counter;
     instance = this;
   }
   getCount() {
-    return this.counter;
+    return this.#counter;
   }
 
   increment() {
-    return ++this.counter;
+    return ++this.#counter;
   }
 
   decrement() {
-    return --this.counter;
+    return --this.#counter;
   }
 }
 
