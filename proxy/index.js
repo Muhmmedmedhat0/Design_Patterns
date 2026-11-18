@@ -1,3 +1,5 @@
+// Proxy is a special object that allows you to intercept and customize operations performed on another object, such as property lookup, assignment, enumeration, function invocation, etc. It can be used to add custom behavior to objects, such as validation, logging, or access control.
+
 const person = {
   name: "Jhon Doe",
   age: 42,

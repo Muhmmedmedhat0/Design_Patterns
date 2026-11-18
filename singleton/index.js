@@ -1,3 +1,5 @@
+// Singleton is a design pattern that restricts the instantiation of a class to a single instance and provides a global point of access to that instance. It is often used to manage shared resources, such as database connections or configuration settings, where having multiple instances could lead to conflicts or inconsistencies.
+
 // A- Old Way Using class
 
 let instance;
