@@ -36,10 +36,10 @@ const userProxy = new Proxy(user, {
         throw "User cannot be younger than 18.";
       }
     }
-
+    console.log(`Updating ${prop} to ${value}`);
     return Reflect.set(target, prop, value);
   },
 });
 
-
 console.log(userProxy.age);
+// console.log((userProxy.email = "jane@doe.com"));
