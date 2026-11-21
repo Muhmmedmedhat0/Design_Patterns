@@ -5,6 +5,7 @@ This repository is a compact JavaScript patterns playground that demonstrates th
 - Module pattern
 - Singleton pattern
 - Proxy pattern
+- Observer pattern
 
 The examples are intentionally small, readable, and designed to teach the idea behind each pattern without adding framework or tooling overhead.
 
@@ -15,6 +16,7 @@ The project is organized into separate folders, each representing a different pa
 - `module/` — demonstrates ES modules and encapsulated utility functions
 - `singleton/` — demonstrates a single shared instance pattern
 - `proxy/` — demonstrates interception of property access and validation logic
+- `observer/` — demonstrates publishing events to multiple subscribers
 
 ## Project structure
 
@@ -34,9 +36,14 @@ Design_Patterns/
 │       ├── index.js
 │       ├── package.json
 │       └── validator.js
-└── singleton/
+├── singleton/
     ├── example.js
     └── index.js
+├── observer/
+    ├── analytics.js
+    ├── index.js
+    ├── observer.js
+    └── package.json
 ```
 
 ## 1) Module pattern
@@ -168,13 +175,50 @@ node index.js
 
 The example validates assignments before they are allowed and throws an error when invalid values are provided.
 
+## 4) Observer pattern
+
+The `observer/` directory demonstrates a publish-subscribe relationship. A subject stores callback functions and notifies them whenever it publishes new data.
+
+### What it does (observer pattern)
+
+- Allows independent subscribers to react to the same event
+- Decouples the publisher from each notification destination
+- Supports subscribing and unsubscribing callbacks at runtime
+- Keeps the shared observer API frozen with `Object.freeze()`
+
+### Key files (observer)
+
+- `observer/observer.js`
+  - Exports a frozen shared subject
+  - `subscribe(func)` registers a callback
+  - `unsubscribe(func)` removes a callback
+  - `notify(data)` sends data to all registered callbacks
+- `observer/analytics.js`
+  - Defines analytics subscribers
+  - Automatically subscribes them to the shared subject on import
+- `observer/index.js`
+  - Imports the analytics subscribers
+  - Publishes data immediately and again after a timeout
+
+### Run the observer example
+
+From the repository root:
+
+```bash
+cd observer
+node index.js
+```
+
+The console displays one analytics message per subscriber for each notification. The example also demonstrates that subscribers remain registered between notifications.
+
 ## Learning takeaways
 
-This project offers a practical introduction to three foundational design patterns:
+This project offers a practical introduction to four foundational design patterns:
 
 - Module pattern: organize code into reusable units
 - Singleton pattern: enforce single shared instance semantics
 - Proxy pattern: control object behavior at runtime
+- Observer pattern: publish events to decoupled subscribers
 
 Together, these examples help explain how JavaScript supports encapsulation, shared state control, and runtime interception in clear, educational code.
 
