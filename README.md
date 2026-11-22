@@ -1,6 +1,6 @@
 ﻿# Design Patterns
 
-This repository is a compact JavaScript patterns playground that demonstrates three important concepts in modern frontend and Node-style architecture:
+This repository is a compact JavaScript patterns playground that demonstrates four important concepts in modern frontend and Node-style architecture:
 
 - Module pattern
 - Singleton pattern
@@ -39,11 +39,19 @@ Design_Patterns/
 ├── singleton/
     ├── example.js
     └── index.js
-├── observer/
+└── observer/
     ├── analytics.js
     ├── index.js
     ├── observer.js
-    └── package.json
+    ├── package.json
+    └── example/
+        ├── analytics.js
+        ├── index.html
+        ├── index.js
+        ├── observer.js
+        ├── package.json
+        ├── style.css
+        └── tsconfig.json
 ```
 
 ## 1) Module pattern
@@ -199,6 +207,14 @@ The `observer/` directory demonstrates a publish-subscribe relationship. A subje
 - `observer/index.js`
   - Imports the analytics subscribers
   - Publishes data immediately and again after a timeout
+- `observer/example/index.html`
+  - Provides the browser interface with pink and blue buttons
+- `observer/example/index.js`
+  - Reads button clicks and publishes button-specific events
+- `observer/example/analytics.js`
+  - Subscribes analytics handlers to browser events
+- `observer/example/observer.js`
+  - Contains the browser observer subject implementation
 
 ### Run the observer example
 
@@ -210,6 +226,17 @@ node index.js
 ```
 
 The console displays one analytics message per subscriber for each notification. The example also demonstrates that subscribers remain registered between notifications.
+
+### Run the browser observer example
+
+From the repository root:
+
+```bash
+cd observer/example
+npm start
+```
+
+Then open `http://localhost:3000`. Click the pink or blue button and open the browser console to see every analytics subscriber receive the corresponding event.
 
 ## Learning takeaways
 
