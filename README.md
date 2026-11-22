@@ -1,11 +1,12 @@
 ﻿# Design Patterns
 
-This repository is a compact JavaScript patterns playground that demonstrates four important concepts in modern frontend and Node-style architecture:
+This repository is a compact JavaScript patterns playground that demonstrates five important concepts in modern frontend and Node-style architecture:
 
 - Module pattern
 - Singleton pattern
 - Proxy pattern
 - Observer pattern
+- Factory pattern
 
 The examples are intentionally small, readable, and designed to teach the idea behind each pattern without adding framework or tooling overhead.
 
@@ -17,6 +18,7 @@ The project is organized into separate folders, each representing a different pa
 - `singleton/` — demonstrates a single shared instance pattern
 - `proxy/` — demonstrates interception of property access and validation logic
 - `observer/` — demonstrates publishing events to multiple subscribers
+- `factory/` — demonstrates creating objects from reusable factory functions
 
 ## Project structure
 
@@ -52,6 +54,12 @@ Design_Patterns/
         ├── package.json
         ├── style.css
         └── tsconfig.json
+├── factory/
+    ├── index.js
+    └── example/
+        ├── books.js
+        ├── index.js
+        └── package.json
 ```
 
 ## 1) Module pattern
@@ -238,14 +246,56 @@ npm start
 
 Then open `http://localhost:3000`. Click the pink or blue button and open the browser console to see every analytics subscriber receive the corresponding event.
 
+## 5) Factory pattern
+
+The `factory/` directory demonstrates object creation through reusable functions instead of direct object literals or repeated constructors.
+
+### What it does (factory pattern)
+
+- Centralizes object creation in one function
+- Generates consistent object shapes
+- Allows derived values such as `fullName` to be calculated once
+- Makes it easier to create many instances with the same structure
+
+### Key files (factory)
+
+- `factory/index.js`
+  - Defines `createUser(firstName, lastName)`
+  - Generates an `id` with `crypto.randomUUID()`
+  - Adds a creation timestamp and a calculated `fullName`
+- `factory/example/books.js`
+  - Defines `createBook(title, author, isbn)`
+  - Exports five preconfigured book objects
+- `factory/example/index.js`
+  - Imports and logs the book module
+
+### Run the factory examples
+
+Run the user factory:
+
+```bash
+cd factory
+node index.js
+```
+
+Run the book factory example:
+
+```bash
+cd factory/example
+node index.js
+```
+
+The user example prints a generated user with an ID and timestamp. The book example prints the module's named exports, including `book1` through `book5`.
+
 ## Learning takeaways
 
-This project offers a practical introduction to four foundational design patterns:
+This project offers a practical introduction to five foundational design patterns:
 
 - Module pattern: organize code into reusable units
 - Singleton pattern: enforce single shared instance semantics
 - Proxy pattern: control object behavior at runtime
 - Observer pattern: publish events to decoupled subscribers
+- Factory pattern: create consistent objects through reusable functions
 
 Together, these examples help explain how JavaScript supports encapsulation, shared state control, and runtime interception in clear, educational code.
 
