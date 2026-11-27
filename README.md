@@ -1,12 +1,13 @@
 ﻿# Design Patterns
 
-This repository is a compact JavaScript patterns playground that demonstrates five important concepts in modern frontend and Node-style architecture:
+This repository is a compact JavaScript patterns playground that demonstrates six important concepts in modern frontend and Node-style architecture:
 
 - Module pattern
 - Singleton pattern
 - Proxy pattern
 - Observer pattern
 - Factory pattern
+- Prototype pattern
 
 The examples are intentionally small, readable, and designed to teach the idea behind each pattern without adding framework or tooling overhead.
 
@@ -19,6 +20,7 @@ The project is organized into separate folders, each representing a different pa
 - `proxy/` — demonstrates interception of property access and validation logic
 - `observer/` — demonstrates publishing events to multiple subscribers
 - `factory/` — demonstrates creating objects from reusable factory functions
+- `prototype/` — demonstrates shared behavior through JavaScript's prototype chain
 
 ## Project structure
 
@@ -60,6 +62,10 @@ Design_Patterns/
         ├── books.js
         ├── index.js
         └── package.json
+├── prototype/
+    ├── index.js
+    └── example/
+        └── index.js
 ```
 
 ## 1) Module pattern
@@ -287,15 +293,56 @@ node index.js
 
 The user example prints a generated user with an ID and timestamp. The book example prints the module's named exports, including `book1` through `book5`.
 
+## 6) Prototype pattern
+
+The `prototype/` directory demonstrates the Prototype pattern and JavaScript's built-in prototype chain. Objects created from a class share methods without storing separate copies of those methods on every instance.
+
+### What it does (prototype pattern)
+
+- Creates a reusable object structure with a constructor
+- Stores instance-specific state on each object
+- Places methods on the constructor's prototype
+- Reuses behavior across all instances of that constructor
+
+### Key files (prototype)
+
+- `prototype/index.js`
+  - Defines a `Dog` class with `name` and `age` properties
+  - Adds `bark()` and `wagTail()` methods to the `Dog` prototype
+  - Creates and logs several dog instances
+- `prototype/example/index.js`
+  - Defines a `User` class with `firstName`, `lastName`, `fullName`, and `email`
+  - Creates multiple users
+  - Demonstrates that two instances share the same method reference
+
+### Run the prototype examples
+
+Run the dog example:
+
+```bash
+cd prototype
+node index.js
+```
+
+Run the user example:
+
+```bash
+cd prototype/example
+node index.js
+```
+
+The dog example prints the created instances and calls shared instance methods. The user example prints `true` because `user.delete === user2.delete` resolves to the same function on the `User` prototype.
+
 ## Learning takeaways
 
-This project offers a practical introduction to five foundational design patterns:
+This project offers a practical introduction to six foundational design patterns:
 
 - Module pattern: organize code into reusable units
 - Singleton pattern: enforce single shared instance semantics
 - Proxy pattern: control object behavior at runtime
 - Observer pattern: publish events to decoupled subscribers
 - Factory pattern: create consistent objects through reusable functions
+- Prototype pattern: reuse behavior through shared prototypes
 
 Together, these examples help explain how JavaScript supports encapsulation, shared state control, and runtime interception in clear, educational code.
 
